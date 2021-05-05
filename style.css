@@ -1,0 +1,15 @@
+.hidden {
+  display: none;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 2px solid black;
+}
+
+li > img {
+  width: 200px;
+}

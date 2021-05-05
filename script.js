@@ -1,25 +1,35 @@
 // API Used - https://apidocs.cheapshark.com/
 
-const searchButton = document.getElementById("search-button");
 const loadButton = document.getElementById("load-button");
-const searchInput = document.getElementById("search-input");
+const nextButton = document.getElementById("next-button");
+const previousButton = document.getElementById("previous-button");
 const API = "https://www.cheapshark.com/api/1.0/deals?";
 const gameList = document.getElementById("game-list");
+
+let pageNum = 0;
 
 loadButton.addEventListener("click", () => {
   processData(API);
 });
 
-searchInput.addEventListener("keydown", (event) => {
-  if (event.key == "Enter") {
-    const value = searchInput.value;
-    document.querySelector("h1").innerText = value;
-    searchInput.value = "";
+nextButton.addEventListener("click", () => {
+  if (previousButton.classList.contains("hidden")) {
+    previousButton.classList.remove("hidden");
   }
+  pageNum += 1;
+  processData(API);
+});
+
+previousButton.addEventListener("click", () => {
+  pageNum -= 1;
+  if (pageNum == 0) {
+    previousButton.classList.add("hidden");
+  }
+  processData(API);
 });
 
 async function processData(source) {
-  let response = await fetch(source + "storeID=1");
+  let response = await fetch(source + "storeID=1" + `&pageNumber=${pageNum}`);
   let data = await response.json();
   putDataToScreen(data, true);
   console.log(data);

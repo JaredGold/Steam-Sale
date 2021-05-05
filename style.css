@@ -8,8 +8,21 @@ li {
   align-items: center;
   margin-bottom: 20px;
   border: 2px solid black;
+  width: 500px;
+  height: 100px;
 }
 
 li > img {
   width: 200px;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+#load-button {
+  margin: 5px 0px;
 }

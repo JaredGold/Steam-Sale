@@ -1,11 +1,12 @@
 // API Used - https://apidocs.cheapshark.com/
 
 const searchButton = document.getElementById("search-button");
+const loadButton = document.getElementById("load-button");
 const searchInput = document.getElementById("search-input");
 const API = "https://www.cheapshark.com/api/1.0/deals?";
 const gameList = document.getElementById("game-list");
 
-searchButton.addEventListener("click", () => {
+loadButton.addEventListener("click", () => {
   processData(API);
 });
 
@@ -32,7 +33,12 @@ function putDataToScreen(data /*, filter*/) {
   data.forEach((x) => {
     if (!dataArr.includes(x["title"])) {
       let node = document.createElement("li");
-      node.innerHTML = `<img src="${x["thumb"]}><a href="">${x["title"]} is on sale for $${x["salePrice"]} from $${x["normalPrice"]}</a>`;
+      node.innerHTML = `
+      <a href="https://store.steampowered.com/app/${x["steamAppID"]}">
+      <img src="${x["thumb"]}">
+      </a>
+        ${x["title"]} is on sale for $${x["salePrice"]} from $${x["normalPrice"]}
+      `;
       gameList.appendChild(node);
       dataArr.push(x["title"]);
     }
